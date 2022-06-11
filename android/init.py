@@ -19,7 +19,9 @@ def noadded (text):
 def basarili (text):
     console.print(Panel(f'[bold green] {text}[/]',width=70),justify="center")                         
 def onemli (text):
-    console.print(Panel(f'[bold cyan]{text}[/]',width=70),justify="center")                         
+    console.print(Panel(f'[bold cyan]{text}[/]',width=70),justify="center")   
+def ads (text):
+   console.print(Panel(f'[bold green]{text}[/]',width=70),justify="center")                      
 def soru (soru):
     console.print(Panel(f'[bold yellow]{soru}[/]',width=70),justify="center")                         
     return console.input(f"[bold yellow]>> [/]")
