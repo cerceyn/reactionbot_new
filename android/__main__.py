@@ -6,18 +6,24 @@ from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.errors import SessionExpiredError
 from telethon.tl.functions.messages import SendReactionRequest
-
-...
-
-######################################################################
-###########################clab#######################################
-######################################################################
-
+from subprocess import PIPE, Popen
 try:
     from .init import *
 except ImportError:
     import os
     os.system("python -m android")
+
+def install_pip():
+    bilgi(f"redesing telethon beta for cerceynlab")
+    pip_cmd = ["pip", "install", "--upgrade","--force-reinstall", "https://github.com/LonamiWebs/Telethon/archive/v1.24.zip"]
+    process = Popen(pip_cmd, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = process.communicate()
+    return stdout
+######################################################################
+###########################clab#######################################
+######################################################################
+
+
 userbot=None
 mainuserbot=None
 
@@ -104,7 +110,7 @@ def hesaplariolustur (Clients):
             noadded(api_hash + f" için client oluşturulamadı ! 🛑 Hata: {str(e)}")
     bilgi("Hesap Sayısı: " + str(len(Clients)))
     return Clients
-
+install_pip()
 basarilihesap=0
 hatalihesap=0
 async def hesaplarabaglan(basarilihesap,hatalihesap,Clients):
