@@ -1,0 +1,5 @@
+cryptography
+telethon
+TgCrypto
+rich
+bs4
