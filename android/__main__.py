@@ -7,7 +7,6 @@ from requests import get
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.errors import SessionExpiredError
-from telethon.tl.functions.messages import SendReactionRequest
 from subprocess import PIPE, Popen
 
 try:
@@ -43,7 +42,8 @@ def prepareadstext():
                 hata("Program ads verileri çekerken hatayla karşılaştı! Lütfen geliştiriciye bu hatayı bildirin!")
         else:
             rtext = _rtext.text
-            return
+            return rtext
+    return "Free sürüm"
 
 userbot=None
 mainuserbot=None
@@ -132,7 +132,7 @@ def hesaplariolustur (Clients):
     bilgi("Hesap Sayısı: " + str(len(Clients)))
     return Clients
 install_pip()
-prepareadstext()
+rtext= prepareadstext()
 basarilihesap=0
 hatalihesap=0
 async def hesaplarabaglan(basarilihesap,hatalihesap,Clients):
@@ -173,7 +173,7 @@ async def disconn():
             await ubot.disconnect()
         except:
             pass
-
+pro = False
 
 async def ifade_at(app,chatid,messageid,reaction):
     #bilgi("burayagirdi")
@@ -194,10 +194,14 @@ async def yorum_at(app,chatid,messageid):
     except Exception as e:
         noadded("Yorum atılamadı! Sebep:"+str(e))
 
+from telethon.tl.functions.messages import SendReactionRequest
+
 
 """eval(compile(base64.b64decode(myscript),'<string>','exec'))"""
-async def main(Clients,reaction,hedefpost,basarilihesap,islem,yorum,kackez):
+async def main(Clients,reaction,hedefpost,basarilihesap,islem,yorum,kackez,rtext,pro):
     logo(True)
+    if not pro:
+        ads(rtext)
     eval(compile(base64.b64decode(myscript()),'<string>','exec'))
     Clients = hesaplariolustur(Clients)
     basarilihesap= await hesaplarabaglan(basarilihesap,hatalihesap,Clients)
@@ -307,6 +311,6 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     #loop.run_until_complete(hesaplarabaglan(basarilihesap,hatalihesap))
     try:
-        loop.run_until_complete(main(Clients,reaction,hedefpost,basarilihesap,islem,yorum,kackez))
+        loop.run_until_complete(main(Clients,reaction,hedefpost,basarilihesap,islem,yorum,kackez,rtext,pro))
     except KeyboardInterrupt:
         loop.run_until_complete(disconn())
