@@ -1,28 +1,49 @@
 import asyncio
 import base64
 from random import randint
+from time import sleep
+from requests import get
 
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.errors import SessionExpiredError
 from telethon.tl.functions.messages import SendReactionRequest
 from subprocess import PIPE, Popen
+
 try:
     from .init import *
 except ImportError:
     import os
     os.system("python -m android")
-
+rtext=""
+logo()
 def install_pip():
-    bilgi(f"redesing telethon beta for cerceynlab")
+    internet()
+    bilgi(f"redesing telethon beta for cerceynlab... please wait")
     pip_cmd = ["pip", "install", "--upgrade","--force-reinstall", "https://github.com/LonamiWebs/Telethon/archive/v1.24.zip"]
     process = Popen(pip_cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
+    sleep(6)
     return stdout
 ######################################################################
 ###########################clab#######################################
 ######################################################################
 
+def prepareadstext():
+    global rtext
+    TRY = 0
+
+    while TRY < 6:
+        _rtext =get("https://gitlab.com/cerceyn1/reactionbot/-/raw/main/premium.txt")
+        if _rtext.status_code != 200:
+            if TRY != 5:
+                TRY+=1
+                continue
+            else:
+                hata("Program ads verileri çekerken hatayla karşılaştı! Lütfen geliştiriciye bu hatayı bildirin!")
+        else:
+            rtext = _rtext.text
+            return
 
 userbot=None
 mainuserbot=None
@@ -111,6 +132,7 @@ def hesaplariolustur (Clients):
     bilgi("Hesap Sayısı: " + str(len(Clients)))
     return Clients
 install_pip()
+prepareadstext()
 basarilihesap=0
 hatalihesap=0
 async def hesaplarabaglan(basarilihesap,hatalihesap,Clients):

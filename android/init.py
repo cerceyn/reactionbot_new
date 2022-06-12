@@ -1,8 +1,7 @@
 from rich.live_render import LiveRender
 from rich.console import Console
 from rich.panel import Panel
-import os, shutil
-import sys
+import sys,socket
 
 console = Console()
 def hata (text):
@@ -17,7 +16,23 @@ def passed (text):
 def noadded (text):
     console.print(Panel(f'[red]{text}[/]',width=70),justify="center")  
 def basarili (text):
-    console.print(Panel(f'[bold green] {text}[/]',width=70),justify="center")                         
+    console.print(Panel(f'[bold green] {text}[/]',width=70),justify="center") 
+def internet(host="8.8.8.8", port=53, timeout=3):
+    """
+    Host: 8.8.8.8 (google-public-dns-a.google.com)
+    OpenPort: 53/tcp
+    Service: domain (DNS/TCP)
+    """
+    bilgi("İnternet bağlantınız kontrol ediliyor!")
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        basarili("Bağlantı var gibi görünüyor!")
+        return True
+    except socket.error as ex:
+        print(ex)
+        noadded("Bağlantı yok gibi gözüküyor !")
+        return False                        
 def onemli (text):
     console.print(Panel(f'[bold cyan]{text}[/]',width=70),justify="center")   
 def ads (text):
