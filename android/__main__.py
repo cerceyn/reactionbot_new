@@ -105,11 +105,7 @@ def hesaplariolustur (Clients):
                 mainuserbot = TelegramClient(
                 StringSession(stringsession),
                 api_id=api_id,
-                api_hash=api_hash,
-                lang_code="tr",
-                device_model='Mac',
-                system_version=' | Powered by @cerceyn',
-                app_version=str('| 1.0'))
+                api_hash=api_hash)
                 basarili(api_hash + " için ana client oluşturuldu !")
             except Exception as e:
                 bilgi("Hesaplar dosyanızdaki ilk satırda bulunan bot her zaman ana hesap olarak ayarlanmaktadır! Lütfen bilgileri düzeltin!")
@@ -120,11 +116,7 @@ def hesaplariolustur (Clients):
             userbot = TelegramClient(
             StringSession(stringsession),
             api_id=api_id,
-            api_hash=api_hash,
-            lang_code="tr",
-            device_model='Mac',
-            system_version=' | Powered by @cerceyn',
-            app_version=str('| 1.0'))
+            api_hash=api_hash)
             Clients.append(userbot)
             basarili(api_hash + " için client oluşturuldu !")
         except Exception as e:
